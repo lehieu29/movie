@@ -13,7 +13,15 @@ const cx = classNames.bind(styles);
 function List() {
     const dataPage = useContext(PagesContext).dataPage;
 
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(() => {
+        if (document.location.pathname.includes('danh-sach/tat-ca/page=')) {
+            const pageInPathname = document.location.pathname.split('/')[3].replace('page=', '');
+
+            return pageInPathname;
+        }
+
+        return 1;
+    });
 
     const [listMovie, setListMovie] = useState(dataPage);
 
