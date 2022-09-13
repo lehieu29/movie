@@ -9,9 +9,6 @@ function SaveMovieProvider({ children }) {
 }
 
 const isSavedMovie = (saveMovies, { movie }) => {
-    //console.log(removeVietnameseTones(saveMovies));
-    //console.log(typeof saveMovies);
-    console.log(saveMovies);
     if (saveMovies === 'you have not saved any movies yet') {
         return false;
     }

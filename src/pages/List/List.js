@@ -17,7 +17,7 @@ function List() {
         if (document.location.pathname.includes('danh-sach/tat-ca/page=')) {
             const pageInPathname = document.location.pathname.split('/')[3].replace('page=', '');
 
-            return pageInPathname;
+            return parseInt(pageInPathname);
         }
 
         return 1;
