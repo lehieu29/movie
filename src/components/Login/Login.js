@@ -1,5 +1,5 @@
 import { useEffect, useContext } from 'react';
-import { auth, fbProvider } from '~/firebase/config';
+import { auth, fbProvider, ggProvider } from '~/firebase/config';
 import { onAuthStateChanged, signInWithPopup } from 'firebase/auth';
 import classNames from 'classnames/bind';
 
@@ -16,8 +16,8 @@ function Login({ id, className }) {
     const saveMoviesContext = useContext(SaveMovieContext);
     const pageContext = useContext(PagesContext);
 
-    const handleFbLogin = () => {
-        signInWithPopup(auth, fbProvider);
+    const handleLogin = (provider) => {
+        signInWithPopup(auth, provider);
         // .then((result) => {
         //     // The signed-in user info.
         //     const user = result.user;
@@ -40,6 +40,7 @@ function Login({ id, className }) {
         //     // ...
         // });
     };
+
     useEffect(() => {
         const modalLoginWrapper = document.getElementById('modal-login');
 
@@ -55,7 +56,7 @@ function Login({ id, className }) {
                     photoURL: user.photoURL,
                 }));
 
-                (async () => {
+                setTimeout(async () => {
                     const saveMovies = await getSaveMovies(user.uid);
 
                     if (saveMovies === 'you have not saved any movies yet') {
@@ -71,7 +72,7 @@ function Login({ id, className }) {
                             pageContext.setDataPage(() => saveMovies.saveMovie);
                         }
                     }
-                })();
+                }, 1);
             } else {
                 // User is signed out
                 // ...
@@ -102,8 +103,11 @@ function Login({ id, className }) {
         <div className={cx('wrapper', [className])} id={id}>
             <div className={cx('overlay')}></div>
             <div className={cx('modal')}>
-                <div className={cx('loginWith-btn')} onClick={handleFbLogin}>
-                    Đăng nhập với facebook
+                <div className={cx('loginWith-btn')} onClick={() => handleLogin(ggProvider)}>
+                    Đăng nhập với Google
+                </div>
+                <div className={cx('loginWith-btn')} onClick={() => handleLogin(fbProvider)}>
+                    Đăng nhập với Facebook
                 </div>
             </div>
         </div>
