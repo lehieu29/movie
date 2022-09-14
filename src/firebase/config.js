@@ -1,11 +1,10 @@
 import { initializeApp } from 'firebase/app';
 
-// import { getAnalytics } from 'firebase/analytics';
 import { getAuth, FacebookAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-    apiKey: 'AIzaSyCz82OzhfcADVUTHnEJgNkcy0eFU4K03O0',
+    apiKey: process.env.REACT_APP_API_KEY,
     authDomain: 'movie-c440c.firebaseapp.com',
     projectId: 'movie-c440c',
     storageBucket: 'movie-c440c.appspot.com',
@@ -16,7 +15,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
 
 export const auth = getAuth(app);
 

@@ -1,13 +1,17 @@
 import { db } from '~/firebase/config';
 import { doc, setDoc, updateDoc, getDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
 
-export const addSaveMovies = async (movieDetails, uid) => {
+export const addSaveMovies = async (movieDetails, user) => {
     try {
-        await updateDoc(doc(db, 'saveMovies', uid), {
+        await updateDoc(doc(db, 'saveMovies', user.uid), {
             saveMovie: arrayUnion(movieDetails),
         });
     } catch (e) {
-        await setDoc(doc(db, 'saveMovies', uid), {
+        await setDoc(doc(db, 'saveMovies', user.uid), {
+            user: {
+                displayName: user.displayName,
+                email: user.email,
+            },
             saveMovie: [movieDetails],
         });
     }

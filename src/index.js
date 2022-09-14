@@ -12,23 +12,23 @@ import { SaveMovieProvider } from '~/store/SaveMovieContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    // <React.StrictMode>
-    <GlobalStyles>
-        <GridStyles>
-            <AuthProvider>
-                <PagesProvider>
-                    <MovieProvider>
-                        <SaveMovieProvider>
-                            <EpisodeProvider>
-                                <App />
-                            </EpisodeProvider>
-                        </SaveMovieProvider>
-                    </MovieProvider>
-                </PagesProvider>
-            </AuthProvider>
-        </GridStyles>
-    </GlobalStyles>,
-    //</React.StrictMode>
+    <React.StrictMode>
+        <GlobalStyles>
+            <GridStyles>
+                <AuthProvider>
+                    <PagesProvider>
+                        <MovieProvider>
+                            <SaveMovieProvider>
+                                <EpisodeProvider>
+                                    <App />
+                                </EpisodeProvider>
+                            </SaveMovieProvider>
+                        </MovieProvider>
+                    </PagesProvider>
+                </AuthProvider>
+            </GridStyles>
+        </GlobalStyles>
+    </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

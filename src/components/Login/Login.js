@@ -44,7 +44,7 @@ function Login({ id, className }) {
     useEffect(() => {
         const modalLoginWrapper = document.getElementById('modal-login');
 
-        onAuthStateChanged(auth, (user) => {
+        const unsubscribed = onAuthStateChanged(auth, (user) => {
             if (user) {
                 if (modalLoginWrapper.style.display === 'block') {
                     modalLoginWrapper.style.display = 'none';
@@ -54,6 +54,7 @@ function Login({ id, className }) {
                     uid: user.uid,
                     displayName: user.displayName,
                     photoURL: user.photoURL,
+                    email: user.email,
                 }));
 
                 setTimeout(async () => {
@@ -93,6 +94,8 @@ function Login({ id, className }) {
         document.addEventListener('click', handleClickOutSideModal);
 
         return () => {
+            unsubscribed();
+
             document.removeEventListener('click', handleClickOutSideModal);
         };
 

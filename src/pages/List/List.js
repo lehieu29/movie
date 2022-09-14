@@ -11,7 +11,7 @@ import { BackIcon, ForwardIcon } from '~/components/icons';
 const cx = classNames.bind(styles);
 
 function List() {
-    const dataPage = useContext(PagesContext).dataPage;
+    const pageContext = useContext(PagesContext);
 
     const [page, setPage] = useState(() => {
         if (document.location.pathname.includes('danh-sach/tat-ca/page=')) {
@@ -23,12 +23,12 @@ function List() {
         return 1;
     });
 
-    const [listMovie, setListMovie] = useState(dataPage);
+    const [listMovie, setListMovie] = useState(pageContext.dataPage);
 
     if (document.location.pathname.includes('phim-da-luu')) {
-        if (!listMovie.length && dataPage) {
+        if (!listMovie.length && pageContext.dataPage) {
             if (listMovie !== 'you have not saved any movies yet') {
-                setListMovie(() => dataPage);
+                setListMovie(() => pageContext.dataPage);
             }
         }
     }
@@ -55,7 +55,9 @@ function List() {
                             result.items.map((movie) => getService.getMovie(movie.slug)),
                         );
 
-                        setListMovie(movieDetails);
+                        setListMovie(() => movieDetails);
+
+                        pageContext.setDataPage(() => movieDetails);
                     })();
                 } catch (error) {
                     console.log(error);

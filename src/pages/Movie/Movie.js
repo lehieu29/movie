@@ -100,7 +100,7 @@ function Movie() {
                                                         return [...prev, movieContext.dataMovie];
                                                     });
 
-                                                    addSaveMovies(movieContext.dataMovie, authContext.user.uid);
+                                                    addSaveMovies(movieContext.dataMovie, authContext.user);
                                                 };
                                             }
                                         } else {
@@ -276,8 +276,6 @@ function Movie() {
                                                             movieContext.dataMovie,
                                                         );
 
-                                                        console.log(indexRemove);
-
                                                         if (indexRemove > -1) {
                                                             saveMoviesContext.setSaveMovies((prev) => {
                                                                 let arr = [...prev];
@@ -299,7 +297,7 @@ function Movie() {
                                                             return [...prev, movieContext.dataMovie];
                                                         });
 
-                                                        addSaveMovies(movieContext.dataMovie, authContext.user.uid);
+                                                        addSaveMovies(movieContext.dataMovie, authContext.user);
                                                     };
                                                 }
                                             } else {
